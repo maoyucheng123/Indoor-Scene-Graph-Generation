@@ -1,7 +1,7 @@
 # Indoor-Scene-Graph-Generation
 BRMS-Net: A Multiscale Relational Network for Unbiased Indoor Scene Graph Generation
 
-![](C:\Users\maoyucheng\Desktop\Snipaste_2025-10-24_18-57-11.png)
+![](images\2)
 
 This repository includes the code for scene graph generation on three datasets VG, OpenPSG and Indoor.
 
@@ -50,4 +50,4 @@ SGG PredCls evalution on Indoor
 
 ## result
 
-![](C:\Users\maoyucheng\Desktop\Snipaste_2025-10-24_19-03-39.png)
+![](images\1)
