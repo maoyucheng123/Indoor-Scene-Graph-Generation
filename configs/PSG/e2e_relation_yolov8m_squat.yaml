@@ -100,7 +100,7 @@ SOLVER:
     PATIENCE: 2
     THRESHOLD: 0.001
     TYPE: WarmupReduceLROnPlateau
-OUTPUT_DIR: './output/motif-predcls'
+OUTPUT_DIR: './output/motif_baseline-predcls'
 TEST:
   ALLOW_LOAD_FROM_CACHE: False
   INFORMATIVE: True

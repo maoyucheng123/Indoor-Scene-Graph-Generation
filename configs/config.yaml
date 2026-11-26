@@ -270,7 +270,7 @@ MODEL:
     OUT_CHANNELS: 256
     SIZE: yolov8l
     WEIGHTS: ''
-OUTPUT_DIR: ./output/motif-predcls/motifs
+OUTPUT_DIR: ./output/motif_baseline-predcls/motifs
 PATHS_CATALOG: sgg_benchmark/config/paths_catalog.py
 PATHS_DATA: /home/maelic/Documents/Datasets/VG/
 SOLVER:

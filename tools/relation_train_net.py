@@ -97,11 +97,6 @@ def train(cfg, logger, args):
 
     logger_step(logger, 'Building model...')
     model = build_detection_model(cfg)
-    print("\n======== Relation Feature Extractor (Union) ========\n")
-    print(model.roi_heads.relation.union_feature_extractor)
-
-    print("\n======== MDFA Module inside Relation Feature Extractor ========\n")
-    print(model.roi_heads.relation.union_feature_extractor.mdfa)
 
     # get run name for logger
     if args['use_wandb']:
@@ -456,7 +451,6 @@ def main():
 
     
     logger.info("#"*20+" END TRAINING "+"#"*20)
-
 
 
 if __name__ == "__main__":

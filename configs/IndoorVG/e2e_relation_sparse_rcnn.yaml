@@ -127,7 +127,7 @@ SOLVER:
     FACTOR: 0.1
     MAX_DECAY_STEP: 16 #3
   OPTIMIZER: "ADAMW"
-OUTPUT_DIR: './output/motif-predcls'
+OUTPUT_DIR: './output/motif_baseline-predcls'
 TEST:
   ALLOW_LOAD_FROM_CACHE: False
   RELATION:

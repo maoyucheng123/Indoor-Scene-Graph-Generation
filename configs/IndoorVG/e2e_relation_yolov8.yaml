@@ -12,7 +12,7 @@ MODEL:
   PRETRAINED_DETECTOR_CKPT: "/media/mao/08409A49409A3CFE/SGG-Benchmark/checkpoints/IndoorVG/yolov8m_indoorvg.pt"
   BACKBONE:
     TYPE: "yolo"
-    NMS_THRESH: 0.09
+    NMS_THRESH: 0.001
     FREEZE: True
   YOLO:
     SIZE: "yolov8m"
@@ -61,14 +61,14 @@ MODEL:
     POS_WEIGHT: 50.0
     ATTRIBUTE_LOSS_WEIGHT: 1.0
     # NUM_ATTRIBUTES: 201             # 201 for VG, 501 for GQA
-    # MAX_ATTRIBUTES: 10
-    ATTRIBUTE_BGFG_SAMPLE: True
-    ATTRIBUTE_BGFG_RATIO: 3
+    # MAX_ATTRIBUTES: 10             
+    ATTRIBUTE_BGFG_SAMPLE: True    
+    ATTRIBUTE_BGFG_RATIO: 3        
   ROI_RELATION_HEAD:
     MLP_HEAD_DIM: 2048
     LOSS: CrossEntropyLoss
-    USE_GT_BOX: True
-    USE_GT_OBJECT_LABEL: True
+    USE_GT_BOX: False
+    USE_GT_OBJECT_LABEL: False
     USE_SPATIAL_FEATURES: True
     USE_UNION_FEATURES: True
     EMBED_DIM: 200
@@ -78,7 +78,7 @@ MODEL:
     BATCH_SIZE_PER_IMAGE: 512      # sample as much as possible这里以后要改
     POSITIVE_FRACTION: 0.4
     CONTEXT_POOLING_DIM: 4096
-    CONTEXT_HIDDEN_DIM: 1024         #1024 for VCTree
+    CONTEXT_HIDDEN_DIM: 256         #1024 for VCTree
     POOLING_ALL_LEVELS: True
     LABEL_SMOOTHING_LOSS: False
     FEATURE_EXTRACTOR: "RelationFeatureExtractor"
@@ -86,7 +86,7 @@ MODEL:
     #PREDICTOR: "MotifPredictor"
     #PREDICTOR: "VCTreePredictor"
     #PREDICTOR: "TransformerPredictor"
-    PREDICTOR: "VCTreePredictor"
+    PREDICTOR: "CausalAnalysisPredictor"
     ################# Parameters for Motif Predictor ##################
     CONTEXT_OBJ_LAYER: 1
     CONTEXT_REL_LAYER: 1
@@ -96,8 +96,8 @@ MODEL:
       EFFECT_TYPE: 'TDE'             # candicates: 'TDE', 'NIE', 'TE', 'none'
       FUSION_TYPE: 'gate'              # candicates: 'sum', 'gate'
       SEPARATE_SPATIAL: False         # separate spatial in union feature
-      CONTEXT_LAYER: "vctree"         # candicates: motifs, vctree, vtranse
-      EFFECT_ANALYSIS: False
+      CONTEXT_LAYER: "motifs"         # candicates: motifs, vctree, vtranse
+      EFFECT_ANALYSIS: True
 
 
     ############### Parameters for Transformer Predictor ##############
@@ -108,7 +108,7 @@ MODEL:
       NUM_HEAD: 8
       KEY_DIM: 64
       VAL_DIM: 64
-      INNER_DIM: 2048
+      INNER_DIM: 2048 
 DATASETS:
   TRAIN: ("VG_indoor_filtered_train",)
   VAL: ("VG_indoor_filtered_val",)
@@ -120,9 +120,9 @@ SOLVER:
   IMS_PER_BATCH: 8
   MAX_EPOCH: 15
   BIAS_LR_FACTOR: 1
-  BASE_LR: 0.01
+  BASE_LR: 0.0001
   WARMUP_FACTOR: 0.5
-  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY: 0.00001
   MOMENTUM: 0.9
   GRAD_NORM_CLIP: 10.0
   STEPS: (10000, 16000)
@@ -138,7 +138,7 @@ SOLVER:
     COOLDOWN: 0
     FACTOR: 0.1
     MAX_DECAY_STEP: 3
-OUTPUT_DIR: './output/vctree+MICE+BFCA-SGDet'
+OUTPUT_DIR: './output/motif+TDE+IETrans-SGDet'
 TEST:
   ALLOW_LOAD_FROM_CACHE: True
   INFORMATIVE: False
@@ -147,4 +147,4 @@ TEST:
     REQUIRE_OVERLAP: True
     LATER_NMS_PREDICTION_THRES: 0.5
   CUSTUM_EVAL: False       # eval motif-SGDet model on custum images, output a json
-  CUSTUM_PATH: '.'         # the folder that contains the custum images, only jpg files are allowed
+  CUSTUM_PATH: '.'         # the folder that contains the custum images, only jpg files are allowed  

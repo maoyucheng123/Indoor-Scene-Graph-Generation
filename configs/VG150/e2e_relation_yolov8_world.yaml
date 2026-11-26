@@ -101,7 +101,7 @@ SOLVER:
     COOLDOWN: 0
     FACTOR: 0.1
     MAX_DECAY_STEP: 3
-OUTPUT_DIR: './output/motif-predcls'
+OUTPUT_DIR: './output/motif_baseline-predcls'
 TEST:
   ALLOW_LOAD_FROM_CACHE: False
   INFORMATIVE: True
